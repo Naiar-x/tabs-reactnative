@@ -1,21 +1,38 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { Text, View } from "react-native";
+import { createAppContainer } from "react-navigation";
+import { createBottomTabNavigator } from "react-navigation-tabs";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+import Icon from "react-native-vector-icons/FontAwesome";
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+import HomeScreen from "./screens/HomeScreen";
+import ProfileScreen from "./screens/ProfileScreen";
+import Add from "./component/Add";
+
+const TabNavigator = createBottomTabNavigator({
+    Home: {
+        screen: HomeScreen,
+        navigationOptions: {
+			tabBarIcon: <Icon name="home" size={24} color="#cc5500" />,
+        },
+	},
+	// Add:{
+	// 	screen:()=>null,
+	// 	navigationOptions:{
+	// 		tabBarIcon:<Add/>
+	// 	}
+	// },
+    Profile: {
+        screen: ProfileScreen,
+        navigationOptions: {
+			tabBarIcon: <Icon name="info-circle" size={24} color="red" />,
+        },
+    },
+},
+{
+	tabBarOptions:{
+		showLabel:false
+	}
 });
+
+export default createAppContainer(TabNavigator);
